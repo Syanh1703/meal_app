@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/models/meals.dart';
+import '../models/meals.dart';
+import '../screen/meal_details_screen.dart';
 
 class MealsItem extends StatelessWidget{
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -9,6 +11,7 @@ class MealsItem extends StatelessWidget{
   final MealsAffordability affordability;
 
   MealsItem({
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.duration,
@@ -43,13 +46,23 @@ class MealsItem extends StatelessWidget{
     }
   }
 
-  void selectMeal(){}
+  void selectMeal(BuildContext ctx){
+    //05_06: Navigate when type on the meal iem
+    Navigator.of(ctx).pushNamed(
+        MealDetailsScreen.routeNameMeal, arguments:
+        {
+          'id': id,
+          'title': title,
+          'image': imageUrl,
+        }
+    );
+  }
 
   final double borderDimension = 15;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: selectMeal,
+        onTap: () => selectMeal(context),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderDimension),
@@ -62,7 +75,7 @@ class MealsItem extends StatelessWidget{
                 //Put elements on top of each other
                 children: <Widget>[
                   ClipRRect(
-                    //04_06: Force the image into a certai form
+                    //04_06: Force the image into a certain form
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(borderDimension),
                       topRight: Radius.circular(borderDimension),

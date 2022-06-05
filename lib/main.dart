@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/screen/category_meals_screen.dart';
+import 'package:meal_app/screen/meal_details_screen.dart';
 import './screen/categories_screen.dart';
 import './screen/category_meals_screen.dart';
+import './screen/meal_details_screen.dart';
 
 void main()
 {
@@ -16,7 +18,18 @@ class MealApp extends StatelessWidget{
           title: appName,
           home: CategoriesScreen(), //02_06: Entry point of the application
         routes: {
-            CategoryMealScreen.categoryMeal: (ctx) => CategoryMealScreen()
+            CategoryMealScreen.categoryMeal: (ctx) => CategoryMealScreen(),
+            MealDetailsScreen.routeNameMeal:(ctx) => MealDetailsScreen()
+        },
+        // onGenerateRoute: (settings){ //05_06: Callback when the app navigated to the named route
+        //     print(settings.arguments);
+        //     return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+        // },
+        onUnknownRoute: (settings){//In case the specific route cannot be found
+          /**
+           * Avoid crash
+           */
+          return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
         },
         theme: ThemeData(
           appBarTheme: const AppBarTheme(titleTextStyle: TextStyle(
