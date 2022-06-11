@@ -16,7 +16,7 @@ class MealsItem extends StatelessWidget{
     required this.imageUrl,
     required this.duration,
     required this.complexity,
-    required this.affordability
+    required this.affordability,
 });
 
   String get complexityText{
@@ -143,7 +143,7 @@ class MealsItem extends StatelessWidget{
                       children: <Widget>[
                         const Icon(Icons.attach_money),
                         const SizedBox(width: 8,),
-                        Text(affordableText, style: TextStyle(
+                        Text(affordableText, style: const TextStyle(
                           fontSize: 14,
                         ),
                         ),
